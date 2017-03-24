@@ -50,6 +50,8 @@ web: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMML.cfg additional.css
 	cd built; [ ! -f $(NAME)-web.zip ] || rm -f $(NAME)-web.zip; zip -r $(NAME)-web.zip $(NAME)-web; cd ..
 #Create a pseudo home page for the github pages site
 	cp built/$(NAME)-web/$(NAME).html built/$(NAME)-web/index.html
+#Put copies of the PDFs in the web space so they can be accessed
+	cp built/$(NAME)-*.pdf built/$(NAME)-web/
 
 clean:
 	rm -f *.aux *.log *.toc *~ *.out *.html *.4ct *.4tc *.dvi *.idv *.tmp *.xref *.lg *.lof *.lot $(NAME).css $(NAME)*x.png $(NAME)-standard.pdf $(NAME)-clear.pdf
