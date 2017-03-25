@@ -260,11 +260,14 @@ x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}.
 
 \begin{example*}
 For instance, the solutions to \(x^2 + 2x -3 = 0\) are:
+%% We can't leave the first column of an array-like equation environment empty
+%% JAWS is unable to locate the row. Adding in white space will not alter 
+%% layout. 
 \begin{align*}
 x &= \frac{-2 \pm \sqrt{2^2-4\times 1 \times -3}}{2 \times 1}\\
-&= \frac{-2 \pm \sqrt{4+12}}{2}\\
-&= \frac{-2 \pm \sqrt{16}}{2}\\
-&= \frac{-2 \pm 4}{2}
+\,&= \frac{-2 \pm \sqrt{4+12}}{2}\\
+\,&= \frac{-2 \pm \sqrt{16}}{2}\\
+\,&= \frac{-2 \pm 4}{2}
 \end{align*} 
 Hence, \(x = 1\) or \(x = -3\).  
 \end{example*}
