@@ -61,7 +61,7 @@ word: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMML.cfg additional.css
 #htlatex needs to run twice to prevent disruption to the sectioning tree caused by e.g. footnotes
 #Note, yes this does run latex 6 times! It is a reported bug: https://puszcza.gnu.org.ua/bugs/index.php?197
 #Note that we are not breaking into sections for the Word transform
-#fn-in stops us from losing the footnotes in the Word format
+#fn-in stops us from losing the footnotes in the Word format: https://tex.stackexchange.com/questions/195551/how-to-add-footnotes-in-htlatex-via-fn-in
 	htlatex $(NAME).tex "mathjaxMML.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
 	htlatex $(NAME).tex "mathjaxMML.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
 #The postprocess is slow, required to produce numbers rather than digits when spoken aloud but requires correct
@@ -70,7 +70,7 @@ word: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMML.cfg additional.css
 #We don't seem to need to postprocess to get correct reading in the docx. 
 #However, this hasn't been tested extensively yet. 
 #	./postprocess.sh
-	pandoc -s -f html -t docx $(NAME).html -o $(NAME).docx
+	pandoc -s -c $(NAME).css -c additional.css -f html -t docx $(NAME).html -o $(NAME).docx
 	mv $(NAME).docx built/
 
 clean:
