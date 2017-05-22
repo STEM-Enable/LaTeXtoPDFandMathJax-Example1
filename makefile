@@ -70,7 +70,8 @@ word: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMML.cfg additional.css
 #We don't seem to need to postprocess to get correct reading in the docx. 
 #However, this hasn't been tested extensively yet. 
 #	./postprocess.sh
-	pandoc -s -c $(NAME).css -c additional.css -f html -t docx $(NAME).html -o $(NAME).docx
+#To get styled theorems we are going to need to do something like http://pandoc.org/MANUAL.html#custom-styles-in-docx-output but this will require us to do some nasty poking.
+	pandoc -s -f html -t docx $(NAME).html -o $(NAME).docx --reference-docx=reference.docx
 	mv $(NAME).docx built/
 
 clean:
