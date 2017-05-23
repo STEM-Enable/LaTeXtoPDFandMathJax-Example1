@@ -34,8 +34,9 @@ web: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMMLWord.cfg additional.css
 	echo "\\\\togglefalse{clearprint}\\\\toggletrue{web}" > toggle.tex
 #htlatex needs to run twice to prevent disruption to the sectioning tree caused by e.g. footnotes
 #Note, yes this does run latex 6 times! It is a reported bug: https://puszcza.gnu.org.ua/bugs/index.php?197
-	htlatex $(NAME).tex "mathjaxMMLWord.cfg,2,sections+,fonts-,charset=utf-8" " -cunihtf -utf8"
-	htlatex $(NAME).tex "mathjaxMMLWord.cfg,2,sections+,fonts-,charset=utf-8" " -cunihtf -utf8"
+#We need to use early_ and early^ so that the author doesn't need to do anything special for macros
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,2,sections+,fonts-,early_,early^,charset=utf-8" " -cunihtf -utf8"
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,2,sections+,fonts-,early_,early^,charset=utf-8" " -cunihtf -utf8"
 #The postprocess is slow, required to produce numbers rather than digits when spoken aloud but requires correct
 #html output. Such things as unmatched brackets can cause problems. If you can't locate the error and can put
 #up with digits instead of numbers then comment out the next line as the web browser and mathjax are less fussy.
@@ -62,8 +63,9 @@ word: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMMLWord.cfg additional.css
 #Note, yes this does run latex 6 times! It is a reported bug: https://puszcza.gnu.org.ua/bugs/index.php?197
 #Note that we are not breaking into sections for the Word transform
 #fn-in stops us from losing the footnotes in the Word format: https://tex.stackexchange.com/questions/195551/how-to-add-footnotes-in-htlatex-via-fn-in
-	htlatex $(NAME).tex "mathjaxMMLWord.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
-	htlatex $(NAME).tex "mathjaxMMLWord.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
+#We need to use early_ and early^ so that the author doesn't need to do anything special for macros
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,sections+,fonts-,fn-in,early_,early^,charset=utf-8" " -cunihtf -utf8"
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,sections+,fonts-,fn-in,early_,early^,charset=utf-8" " -cunihtf -utf8"
 #The postprocess is slow, required to produce numbers rather than digits when spoken aloud but requires correct
 #html output. Such things as unmatched brackets can cause problems. If you can't locate the error and can put
 #up with digits instead of numbers then comment out the next line as the web browser and mathjax are less fussy.
