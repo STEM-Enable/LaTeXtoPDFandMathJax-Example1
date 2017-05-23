@@ -29,13 +29,13 @@ clear: clean
 	mv $(NAME).pdf built/$(NAME)-clear.pdf
 
 #We require some additional files for everything to work. 
-web: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMML.cfg additional.css
+web: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMMLWord.cfg additional.css
 	[ ! -f toggle.tex ] || rm -f toggle.tex
 	echo "\\\\togglefalse{clearprint}\\\\toggletrue{web}" > toggle.tex
 #htlatex needs to run twice to prevent disruption to the sectioning tree caused by e.g. footnotes
 #Note, yes this does run latex 6 times! It is a reported bug: https://puszcza.gnu.org.ua/bugs/index.php?197
-	htlatex $(NAME).tex "mathjaxMML.cfg,2,sections+,fonts-,charset=utf-8" " -cunihtf -utf8"
-	htlatex $(NAME).tex "mathjaxMML.cfg,2,sections+,fonts-,charset=utf-8" " -cunihtf -utf8"
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,2,sections+,fonts-,charset=utf-8" " -cunihtf -utf8"
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,2,sections+,fonts-,charset=utf-8" " -cunihtf -utf8"
 #The postprocess is slow, required to produce numbers rather than digits when spoken aloud but requires correct
 #html output. Such things as unmatched brackets can cause problems. If you can't locate the error and can put
 #up with digits instead of numbers then comment out the next line as the web browser and mathjax are less fussy.
@@ -55,15 +55,15 @@ web: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMML.cfg additional.css
 	cp built/$(NAME).docx built/$(NAME)-web/
 
 #To transform to Word we need to use the web transform but without breaking into sections and then use Pandoc 19+
-word: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMML.cfg additional.css
+word: clean mathml.4ht unicode.4hf groupmn.4xt mathjaxMMLWord.cfg additional.css
 	[ ! -f toggle.tex ] || rm -f toggle.tex
 	echo "\\\\togglefalse{clearprint}\\\\toggletrue{web}" > toggle.tex
 #htlatex needs to run twice to prevent disruption to the sectioning tree caused by e.g. footnotes
 #Note, yes this does run latex 6 times! It is a reported bug: https://puszcza.gnu.org.ua/bugs/index.php?197
 #Note that we are not breaking into sections for the Word transform
 #fn-in stops us from losing the footnotes in the Word format: https://tex.stackexchange.com/questions/195551/how-to-add-footnotes-in-htlatex-via-fn-in
-	htlatex $(NAME).tex "mathjaxMML.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
-	htlatex $(NAME).tex "mathjaxMML.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
+	htlatex $(NAME).tex "mathjaxMMLWord.cfg,sections+,fonts-,fn-in,charset=utf-8" " -cunihtf -utf8"
 #The postprocess is slow, required to produce numbers rather than digits when spoken aloud but requires correct
 #html output. Such things as unmatched brackets can cause problems. If you can't locate the error and can put
 #up with digits instead of numbers then comment out the next line as the web browser and mathjax are less fussy.
